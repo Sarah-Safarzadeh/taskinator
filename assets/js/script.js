@@ -192,10 +192,29 @@ var dropZoneDragHandler = function(event) {
   }
 };
 
+var dropTaskHandler = function(event) {
+  var id = event.dataTransfer.getData("text/plain");
+  var draggableElement = document.querySelector("[data-task-id='" + id + "']");
+  var dropZoneEl = event.target.closest(".task-list");
+  var statusType = dropZoneEl.id;
+// set status of task based on dropZone id
+var statusSelectEl = draggableElement.querySelector("select[name='status-change']");
+if (statusType === "tasks-to-do") {
+  statusSelectEl.selectedIndex = 0;
+} 
+else if (statusType === "tasks-in-progress") {
+  statusSelectEl.selectedIndex = 1;
+} 
+else if (statusType === "tasks-completed") {
+  statusSelectEl.selectedIndex = 2;
+}
+dropZoneEl.appendChild(draggableElement);
+};
+
 // Event Listeners
 formEl.addEventListener("submit", taskFormHandler);
 pageContentEl.addEventListener("change", taskStatusChangeHandler);
 pageContentEl.addEventListener("click", taskButtonHandler);
 pageContentEl.addEventListener("dragstart", dragTaskHandler);
 pageContentEl.addEventListener("dragover", dropZoneDragHandler);
-
+pageContentEl.addEventListener("drop", dropTaskHandler);

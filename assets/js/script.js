@@ -314,7 +314,6 @@ else if (tasks[i].status === completeEditTask) {
   tasksCompletedEl.appendChild.listItemEl;
   taskIdCounter++;
 }
-
 }
 
 // Event Listeners

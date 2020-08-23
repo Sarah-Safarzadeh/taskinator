@@ -191,6 +191,13 @@ var taskStatusChangeHandler = function (event) {
   else if (statusValue === "completed") {
     tasksCompletedEl.appendChild(taskSelected);
   }
+
+  // update task's in tasks array
+for (var i = 0; i < tasks.length; i++) {
+  if (tasks[i].id === parseInt(taskId)) {
+    tasks[i].status = statusValue;
+  }
+}
 };
 
 var dragTaskHandler = function (event) {
@@ -226,6 +233,15 @@ var dropTaskHandler = function (event) {
   }
   dropZoneEl.removeAttribute("style");
   dropZoneEl.appendChild(draggableElement);
+
+  // loop through tasks array to find and update the updated task's status
+for (var i = 0; i < tasks.length; i++) {
+  if (tasks[i].id === parseInt(id)) {
+    tasks[i].status = statusSelectEl.value.toLowerCase();
+  }
+}
+
+console.log(tasks);
 };
 
 var dragLeaveHandler = function (event) {
